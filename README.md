@@ -8,8 +8,8 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     npm install -g homebridge-mqttswitch
     
 # Release notes
-Version 0.0.1
-+ Initial draft
+Version 0.0.2
++ Initial public draft
 
 # Configuration
 Remember to configure the plugin in config.json in your home directory inside the .homebridge directory. Configuration parameters:
