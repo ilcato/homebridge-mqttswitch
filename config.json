@@ -12,16 +12,16 @@
     ],
     "accessories": [
     	{
-			"accessory": "mqttswitch",	
-            "name": "TestButton1",
-			"url": "wss://m20.cloudmqtt.com:32794/",
-			"username": "kgndtjgo",
-			"password": "08Dj9HK42z5x",
-			"caption": "Button1",
-			"topics": {
-				"statusGet": 	"/catozzi/test/statusGet/Button1",
-				"statusSet": 	"/catozzi/test/statusSet/Button1"
-			}
+        	"accessory": "mqttswitch",
+            "name": "PUT THE NAME OF YOUR SWITCH HERE",
+            "url": "PUT URL OF THE BROKER HERE",
+			"username": "PUT USERNAME OF THE BROKER HERE",
+            "password": "PUT PASSWORD OF THE BROKER HERE"
+ 			"caption": "PUT THE LABEL OF YOUR SWITCH HERE",
+ 			"topics": {
+ 				"statusGet": 	"PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SWITCH HERE",
+ 				"statusSet": 	"PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SWITCH HERE"
+ 			}
     	}
     ]
 }

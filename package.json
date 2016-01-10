@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ilcato/homebridge-mqtt"
+    "url": "https://github.com/ilcato/homebridge-mqttswitch"
   },
   "keywords": [
     "homebridge-plugin",
