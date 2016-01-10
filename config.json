@@ -1,0 +1,27 @@
+{
+    "bridge": {
+        "name": "Homebridge",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    
+    "description": "This is an example configuration file. You can use this as a template for creating your own configuration file.",
+
+    "platforms": [
+    ],
+    "accessories": [
+    	{
+			"accessory": "mqttswitch",	
+            "name": "TestButton1",
+			"url": "wss://m20.cloudmqtt.com:32794/",
+			"username": "kgndtjgo",
+			"password": "08Dj9HK42z5x",
+			"caption": "Button1",
+			"topics": {
+				"statusGet": 	"/catozzi/test/statusGet/Button1",
+				"statusSet": 	"/catozzi/test/statusSet/Button1"
+			}
+    	}
+    ]
+}

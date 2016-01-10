@@ -1,0 +1,36 @@
+{
+  "name": "homebridge-mqttswitch",
+  "version": "0.0.1",
+  "description": "Homebridge plugin for MQTT switches",
+  "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"Error: configure and run homebridge to start\" && exit 1"
+  },
+  "engines": {
+    "node": ">4.0.0",
+    "homebridge": ">=0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ilcato/homebridge-mqtt"
+  },
+  "keywords": [
+    "homebridge-plugin",
+    "MQTT",
+    "homekit",
+    "Siri",
+    "IoT",
+    "Switch"
+  ],
+  "dependencies": {
+    "mqtt": "^1.6.3"
+  },
+  "author": "ilcato",
+  "license": "GPL2",
+  "bugs": {
+    "url": "https://github.com/ilcato/homebridge-mqttswitch/issues"
+  },
+  "homepage": "https://github.com/ilcato/homebridge-mqttswitch"
+}
