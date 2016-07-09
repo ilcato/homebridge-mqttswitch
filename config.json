@@ -5,23 +5,30 @@
         "port": 51826,
         "pin": "031-45-154"
     },
-    
+
     "description": "This is an example configuration file. You can use this as a template for creating your own configuration file.",
 
     "platforms": [
     ],
     "accessories": [
-    	{
-        	"accessory": "mqttswitch",
-            "name": "PUT THE NAME OF YOUR SWITCH HERE",
-            "url": "PUT URL OF THE BROKER HERE",
-			"username": "PUT USERNAME OF THE BROKER HERE",
-            		"password": "PUT PASSWORD OF THE BROKER HERE",
- 			"caption": "PUT THE LABEL OF YOUR SWITCH HERE",
- 			"topics": {
- 				"statusGet": 	"PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SWITCH HERE",
- 				"statusSet": 	"PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SWITCH HERE"
- 			}
-    	}
+    {
+      "accessory": "mqttlightbulb",
+      "name": "<name of lightbulb>",
+      "url": "<url of broker>",
+      "username": "<username>",
+      "password": "<password>",
+      "caption": "<label>",
+      "topics":
+      {
+        "getOn": 	"<topic to get the status>",
+        "setOn": 	"<topic to set the status>",
+        "getBrightness": 	"<topic to get the brightness>",
+        "setBrightness": 	"<topic to set the brightness>",
+        "getHue": 	"<topic to get the hue>",
+        "setHue": 	"<topic to set the hue>",
+        "getSaturation": 	"<topic to get the saturation>",
+        "setSaturation": 	"<topic to set the saturation>"
+      }
+    }
     ]
 }

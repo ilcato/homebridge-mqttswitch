@@ -3,7 +3,7 @@
 // Remember to add accessory to config.json. Example:
 // "accessories": [
 //     {
-//            "accessory": "mqttswitch",
+//            "accessory": "mqttlightbulb",
 //            "name": "PUT THE NAME OF YOUR SWITCH HERE",
 //            "url": "PUT URL OF THE BROKER HERE",
 //			  "username": "PUT USERNAME OF THE BROKER HERE",
@@ -25,7 +25,7 @@ var Service, Characteristic;
 var mqtt = require("mqtt");
 
 
-function MqttSwitchAccessory(log, config) {
+function mqttlightbulbAccessory(log, config) {
   	this.log          	= log;
   	this.name 			= config["name"];
   	this.url 			= config["url"];
@@ -49,53 +49,128 @@ function MqttSwitchAccessory(log, config) {
     	rejectUnauthorized: false
 	};
 	this.caption		= config["caption"];
-	this.topicStatusGet	= config["topics"].statusGet;
-	this.topicStatusSet	= config["topics"].statusSet;
+  this.topics = config["topics"];
+	this.on = false;
+  this.brightness = 0;
+  this.hue = 0;
+  this.saturation = 0;
 
-	this.switchStatus = false;
-	
-	this.service = new Service.Switch(this.name);
+	this.service = new Service.Lightbulb(this.name);
   	this.service
-    	.getCharacteristic(Characteristic.On)
+      .getCharacteristic(Characteristic.On)
     	.on('get', this.getStatus.bind(this))
     	.on('set', this.setStatus.bind(this));
-	
+    this.service
+      .getCharacteristic(Characteristic.Brightness)
+    	.on('get', this.getBrightness.bind(this))
+    	.on('set', this.setBrightness.bind(this));
+    this.service
+      .getCharacteristic(Characteristic.Hue)
+    	.on('get', this.getHue.bind(this))
+    	.on('set', this.setHue.bind(this));
+    this.service
+      .getCharacteristic(Characteristic.Saturation)
+    	.on('get', this.getSaturation.bind(this))
+    	.on('set', this.setSaturation.bind(this));
+
 	// connect to MQTT broker
 	this.client = mqtt.connect(this.url, this.options);
 	var that = this;
-	this.client.on('error', function () {
-		that.log('Error event on MQTT');
+	this.client.on('error', function (err) {
+		that.log('Error event on MQTT:', err);
 	});
 
 	this.client.on('message', function (topic, message) {
-		if (topic == that.topicStatusGet) {
+    // console.log(message.toString(), topic);
+
+		if (topic == that.topics.getOn) {
 			var status = message.toString();
-			that.switchStatus = (status == "true" ? true : false);
-		   	that.service.getCharacteristic(Characteristic.On).setValue(that.switchStatus, undefined, 'fromSetValue');
+			that.on = (status == "true" ? true : false);
+		   	that.service.getCharacteristic(Characteristic.On).setValue(that.on, undefined, 'fromSetValue');
 		}
+
+    if (topic == that.topics.getBrightness) {
+      var val = parseInt(message.toString());
+      that.brightness = val;
+      that.service.getCharacteristic(Characteristic.Brightness).setValue(that.brightness, undefined, 'fromSetValue');
+    }
+
+    if (topic == that.topics.getHue) {
+      var val = parseInt(message.toString());
+      that.hue = val;
+      that.service.getCharacteristic(Characteristic.Hue).setValue(that.hue, undefined, 'fromSetValue');
+    }
+
+    if (topic == that.topics.getSaturation) {
+      var val = parseInt(message.toString());
+      that.saturation = val;
+      that.service.getCharacteristic(Characteristic.Brightness).setValue(that.saturation, undefined, 'fromSetValue');
+    }
 	});
-    this.client.subscribe(this.topicStatusGet);
+    this.client.subscribe(this.topics.getOn);
+    this.client.subscribe(this.topics.getBrightness);
+    this.client.subscribe(this.topics.getHue);
+    this.client.subscribe(this.topics.getSaturation);
 }
 
 module.exports = function(homebridge) {
   	Service = homebridge.hap.Service;
   	Characteristic = homebridge.hap.Characteristic;
-  
-  	homebridge.registerAccessory("homebridge-mqttswitch", "mqttswitch", MqttSwitchAccessory);
+
+  	homebridge.registerAccessory("homebridge-mqttlightbulb", "mqttlightbulb", mqttlightbulbAccessory);
 }
 
-MqttSwitchAccessory.prototype.getStatus = function(callback) {
-    callback(null, this.switchStatus);
+mqttlightbulbAccessory.prototype.getStatus = function(callback) {
+    callback(null, this.on);
 }
 
-MqttSwitchAccessory.prototype.setStatus = function(status, callback, context) {
+mqttlightbulbAccessory.prototype.setStatus = function(status, callback, context) {
 	if(context !== 'fromSetValue') {
-		this.switchStatus = status;
-	    this.client.publish(this.topicStatusSet, status ? "true" : "false");
-	} 
+		this.on = status;
+	  this.client.publish(this.topics.setOn, status ? "true" : "false");
+	}
 	callback();
 }
 
-MqttSwitchAccessory.prototype.getServices = function() {
+mqttlightbulbAccessory.prototype.getBrightness = function(callback) {
+    callback(null, this.brightness);
+}
+
+mqttlightbulbAccessory.prototype.setBrightness = function(brightness, callback, context) {
+	if(context !== 'fromSetValue') {
+		this.brightness = brightness;
+    // console.log("Brightness:",this.brightness);
+	  this.client.publish(this.topics.setBrightness, this.brightness.toString());
+	}
+	callback();
+}
+
+mqttlightbulbAccessory.prototype.getHue = function(callback) {
+    callback(null, this.hue);
+}
+
+mqttlightbulbAccessory.prototype.setHue = function(hue, callback, context) {
+	if(context !== 'fromSetValue') {
+		this.hue = hue;
+    // console.log("Hue:",this.hue);
+	  this.client.publish(this.topics.setHue, this.hue.toString());
+	}
+	callback();
+}
+
+mqttlightbulbAccessory.prototype.getSaturation = function(callback) {
+    callback(null, this.saturation);
+}
+
+mqttlightbulbAccessory.prototype.setSaturation = function(saturation, callback, context) {
+	if(context !== 'fromSetValue') {
+		this.saturation = saturation;
+    // console.log("Saturation:",this.saturation);
+	  this.client.publish(this.topics.setSaturation, this.saturation.toString());
+	}
+	callback();
+}
+
+mqttlightbulbAccessory.prototype.getServices = function() {
   return [this.service];
 }

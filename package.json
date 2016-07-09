@@ -1,7 +1,7 @@
 {
-  "name": "homebridge-mqttswitch",
-  "version": "0.0.2",
-  "description": "Homebridge plugin for MQTT switches",
+  "name": "homebridge-mqttlightbulb",
+  "version": "0.0.1",
+  "description": "Homebridge plugin for MQTT Lightbulub",
   "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ilcato/homebridge-mqttswitch"
+    "url": "https://github.com/ameeuw/homebridge-mqttlightbulb"
   },
   "keywords": [
     "homebridge-plugin",
@@ -22,15 +22,15 @@
     "homekit",
     "Siri",
     "IoT",
-    "Switch"
+    "Lightbulb"
   ],
   "dependencies": {
     "mqtt": "^1.6.3"
   },
-  "author": "ilcato",
+  "author": "ameeuw",
   "license": "GPL2",
   "bugs": {
-    "url": "https://github.com/ilcato/homebridge-mqttswitch/issues"
+    "url": "https://github.com/ameeuw/homebridge-mqttlightbulb/issues"
   },
-  "homepage": "https://github.com/ilcato/homebridge-mqttswitch"
+  "homepage": "https://github.com/ameeuw/homebridge-mqttlightbulb"
 }
