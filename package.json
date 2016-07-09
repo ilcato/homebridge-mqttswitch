@@ -1,6 +1,6 @@
 {
   "name": "homebridge-mqttlightbulb",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Homebridge plugin for MQTT Lightbulub",
   "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
   "main": "index.js",

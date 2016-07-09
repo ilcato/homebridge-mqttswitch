@@ -35,4 +35,4 @@ Remember to configure the plugin in config.json in your home directory inside th
 }
 ```
 
-Look for a sample config in [config.json example](https://github.com/ilcato/homebridge-mqttlightbulb/blob/master/config.json)
+Look for a sample config in [config.json example](https://github.com/ameeuw/homebridge-mqttlightbulb/blob/master/config.json)
