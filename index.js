@@ -29,6 +29,9 @@ function MqttSwitchAccessory(log, config) {
   	this.log          	= log;
   	this.name 			= config["name"];
   	this.url 			= config["url"];
+    this.publish_options = {
+      qos: ((config["qos"] !== undefined)? config["qos"]: 0)
+    };
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 	this.options = {
 	    keepalive: 10,
@@ -53,13 +56,13 @@ function MqttSwitchAccessory(log, config) {
 	this.topicStatusSet	= config["topics"].statusSet;
 
 	this.switchStatus = false;
-	
+
 	this.service = new Service.Switch(this.name);
   	this.service
     	.getCharacteristic(Characteristic.On)
     	.on('get', this.getStatus.bind(this))
     	.on('set', this.setStatus.bind(this));
-	
+
 	// connect to MQTT broker
 	this.client = mqtt.connect(this.url, this.options);
 	var that = this;
@@ -80,7 +83,7 @@ function MqttSwitchAccessory(log, config) {
 module.exports = function(homebridge) {
   	Service = homebridge.hap.Service;
   	Characteristic = homebridge.hap.Characteristic;
-  
+
   	homebridge.registerAccessory("homebridge-mqttswitch", "mqttswitch", MqttSwitchAccessory);
 }
 
@@ -91,8 +94,8 @@ MqttSwitchAccessory.prototype.getStatus = function(callback) {
 MqttSwitchAccessory.prototype.setStatus = function(status, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.switchStatus = status;
-	    this.client.publish(this.topicStatusSet, status ? "true" : "false");
-	} 
+	    this.client.publish(this.topicStatusSet, status ? "true" : "false", this.publish_options);
+	}
 	callback();
 }
 
