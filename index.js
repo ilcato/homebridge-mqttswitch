@@ -12,7 +12,10 @@
 // 			  "topics": {
 // 				"statusGet": 	"PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SWITCH HERE",
 // 				"statusSet": 	"PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SWITCH HERE"
-// 			  }
+// 			  },
+//			  "onValue": "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
+//			  "offValue": "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
+//			  "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
 //     }
 // ],
 //
@@ -54,6 +57,12 @@ function MqttSwitchAccessory(log, config) {
 	this.caption		= config["caption"];
 	this.topicStatusGet	= config["topics"].statusGet;
 	this.topicStatusSet	= config["topics"].statusSet;
+    this.onValue = (config["onValue"] !== undefined) ? config["onValue"]: "true";
+    this.offValue = (config["offValue"] !== undefined) ? config["offValue"]: "false";
+	if (config["integerValue"]) {
+		this.onValue = "1";
+		this.offValue = "0";
+	}
 
 	this.switchStatus = false;
 
@@ -73,7 +82,7 @@ function MqttSwitchAccessory(log, config) {
 	this.client.on('message', function (topic, message) {
 		if (topic == that.topicStatusGet) {
 			var status = message.toString();
-			that.switchStatus = (status == "true" ? true : false);
+			that.switchStatus = (status == that.onValue) ? true : false;
 		   	that.service.getCharacteristic(Characteristic.On).setValue(that.switchStatus, undefined, 'fromSetValue');
 		}
 	});
@@ -94,7 +103,7 @@ MqttSwitchAccessory.prototype.getStatus = function(callback) {
 MqttSwitchAccessory.prototype.setStatus = function(status, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.switchStatus = status;
-	    this.client.publish(this.topicStatusSet, status ? "true" : "false", this.publish_options);
+	    this.client.publish(this.topicStatusSet, status ? this.onValue : this.offValue, this.publish_options);
 	}
 	callback();
 }
