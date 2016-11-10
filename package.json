@@ -1,6 +1,6 @@
 {
   "name": "homebridge-mqttswitch",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Homebridge plugin for MQTT switches",
   "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
   "main": "index.js",
