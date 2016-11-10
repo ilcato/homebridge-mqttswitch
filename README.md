@@ -8,6 +8,9 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     npm install -g homebridge-mqttswitch
     
 # Release notes
+Version 0.0.3
++ Added onValue, offValue and integerValue params
+
 Version 0.0.2
 + Initial public draft
 
