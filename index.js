@@ -140,7 +140,7 @@ mqttlightbulbAccessory.prototype.setBrightness = function(brightness, callback, 
 	if(context !== 'fromSetValue') {
 		this.brightness = brightness;
     // console.log("Brightness:",this.brightness);
-	  this.client.publish(this.topics.setBrightness, this.brightness.toString());
+	  this.client.publish(this.topics.setBrightness, this.brightness.toString(),{ retain: true });
 	}
 	callback();
 }
