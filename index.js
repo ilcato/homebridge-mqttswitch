@@ -42,7 +42,7 @@ function mqttlightbulbAccessory(log, config) {
 			topic: 'WillMsg',
 			payload: 'Connection Closed abnormally..!',
 			qos: 0,
-			retain: false
+			retain: true
 		},
 	    username: config["username"],
 	    password: config["password"],
