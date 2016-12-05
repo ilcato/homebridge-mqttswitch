@@ -49,6 +49,7 @@ function mqttlightbulbAccessory(log, config) {
     	rejectUnauthorized: false
 	};
 	this.caption		= config["caption"];
+	this.retain             = config["retain"];
   this.topics = config["topics"];
 	this.on = false;
   this.brightness = 0;
@@ -127,7 +128,7 @@ mqttlightbulbAccessory.prototype.getStatus = function(callback) {
 mqttlightbulbAccessory.prototype.setStatus = function(status, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.on = status;
-	  this.client.publish(this.topics.setOn, status ? "true" : "false",{ retain: config["retain"] });
+	  this.client.publish(this.topics.setOn, status ? "true" : "false",{ retain: this.retain});
 	}
 	callback();
 }
@@ -140,7 +141,7 @@ mqttlightbulbAccessory.prototype.setBrightness = function(brightness, callback, 
 	if(context !== 'fromSetValue') {
 		this.brightness = brightness;
     // console.log("Brightness:",this.brightness);
-	  this.client.publish(this.topics.setBrightness, this.brightness.toString(),{ retain: config["retain"] });
+	  this.client.publish(this.topics.setBrightness, this.brightness.toString(),{ retain: this.retain});
 	}
 	callback();
 }
@@ -153,7 +154,7 @@ mqttlightbulbAccessory.prototype.setHue = function(hue, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.hue = hue;
     // console.log("Hue:",this.hue);
-	  this.client.publish(this.topics.setHue, this.hue.toString(),{ retain: config["retain"] });
+	  this.client.publish(this.topics.setHue, this.hue.toString(),{ retain: this.retain});
 	}
 	callback();
 }
@@ -166,7 +167,7 @@ mqttlightbulbAccessory.prototype.setSaturation = function(saturation, callback, 
 	if(context !== 'fromSetValue') {
 		this.saturation = saturation;
     // console.log("Saturation:",this.saturation);
-	  this.client.publish(this.topics.setSaturation, this.saturation.toString(),{ retain: config["retain"] });
+	  this.client.publish(this.topics.setSaturation, this.saturation.toString(),{ retain: this.retain});
 	}
 	callback();
 }
