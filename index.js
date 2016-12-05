@@ -42,7 +42,7 @@ function mqttlightbulbAccessory(log, config) {
 			topic: 'WillMsg',
 			payload: 'Connection Closed abnormally..!',
 			qos: 0,
-			retain: true
+			retain: false
 		},
 	    username: config["username"],
 	    password: config["password"],
@@ -127,7 +127,7 @@ mqttlightbulbAccessory.prototype.getStatus = function(callback) {
 mqttlightbulbAccessory.prototype.setStatus = function(status, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.on = status;
-	  this.client.publish(this.topics.setOn, status ? "true" : "false");
+	  this.client.publish(this.topics.setOn, status ? "true" : "false",{ retain: config["retain"] });
 	}
 	callback();
 }
@@ -140,7 +140,7 @@ mqttlightbulbAccessory.prototype.setBrightness = function(brightness, callback, 
 	if(context !== 'fromSetValue') {
 		this.brightness = brightness;
     // console.log("Brightness:",this.brightness);
-	  this.client.publish(this.topics.setBrightness, this.brightness.toString(),{ retain: true });
+	  this.client.publish(this.topics.setBrightness, this.brightness.toString(),{ retain: config["retain"] });
 	}
 	callback();
 }
@@ -153,7 +153,7 @@ mqttlightbulbAccessory.prototype.setHue = function(hue, callback, context) {
 	if(context !== 'fromSetValue') {
 		this.hue = hue;
     // console.log("Hue:",this.hue);
-	  this.client.publish(this.topics.setHue, this.hue.toString());
+	  this.client.publish(this.topics.setHue, this.hue.toString(),{ retain: config["retain"] });
 	}
 	callback();
 }
@@ -166,7 +166,7 @@ mqttlightbulbAccessory.prototype.setSaturation = function(saturation, callback, 
 	if(context !== 'fromSetValue') {
 		this.saturation = saturation;
     // console.log("Saturation:",this.saturation);
-	  this.client.publish(this.topics.setSaturation, this.saturation.toString());
+	  this.client.publish(this.topics.setSaturation, this.saturation.toString(),{ retain: config["retain"] });
 	}
 	callback();
 }
