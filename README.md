@@ -8,6 +8,9 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     npm install -g homebridge-mqttswitch
     
 # Release notes
+Version 0.0.4 Dynamic Status
++ This new version uses an additional status command, sent via the "set" Topic, to dynamically retrieve the status of the switch from the device. The status should be then published by the device on the "get" topic, as usual. You should develop the device code to accept the status command on the "set" topic and answer publishing the actual status using the "get" topic. The status values must be the same used for the onValue and offValue configurations. This new version is able to detect the actual state of the device. This fixes also the issue #12   
+
 Version 0.0.3
 + Added onValue, offValue and integerValue params
 
@@ -28,6 +31,7 @@ Remember to configure the plugin in config.json in your home directory inside th
 	}
 + "onValue": "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
 + "offValue": "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
++ "statusCmd": "OPTIONALLY PUT THE STATUS COMMAND HERE" 
 + "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
 
 Look for a sample config in [config.json example](https://github.com/ilcato/homebridge-mqttswitch/blob/master/config.json)
