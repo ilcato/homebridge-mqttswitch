@@ -9,7 +9,7 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     
 # Release notes
 Version 0.0.4 Dynamic Status
-+ This new version uses an additional status command, sent via the "set" Topic, to dynamically retrieve the status of the switch from the device. The status should be then published by the device on the "get" topic, as usual. You should develop the device code to accept the status command on the "set" topic and answer publishing the actual status using the "get" topic. The status values must be the same used for the onValue and offValue configurations. This new version is able to detect the actual state of the device. This fixes also the issue #12   
++ This new version uses an additional status command, sent via the "set" Topic, to dynamically retrieve the status of the switch from the device. The status should be then published by the device on the "get" topic, as usual. You should develop the device code to accept the status command on the "set" topic and answer publishing the actual status using the "get" topic. The status values must be the same used for the onValue and offValue configurations. This new version is able to detect the actual state of the device. This fixes also partially the issue #12. But, if the switch is off (I mean, the MQTT client is not responding to the status command) the best thing on the Home app is to put the device in a "No Response" state. You can't be sure that the device is really off, just think about a network problem, instead of a power problem. The method for this is not yet implemented in this version.    
 
 Version 0.0.3
 + Added onValue, offValue and integerValue params
