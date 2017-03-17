@@ -15,6 +15,7 @@
 // 			  },
 //			  "onValue": "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
 //			  "offValue": "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
+//			  "statusCmd": "OPTIONALLY PUT THE STATUS COMMAND HERE",
 //			  "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
 //     }
 // ],
@@ -26,7 +27,6 @@
 
 var Service, Characteristic;
 var mqtt = require("mqtt");
-
 
 function MqttSwitchAccessory(log, config) {
   	this.log          	= log;
@@ -63,6 +63,7 @@ function MqttSwitchAccessory(log, config) {
 		this.onValue = "1";
 		this.offValue = "0";
 	}
+    this.statusCmd = config["statusCmd"];
 
 	this.switchStatus = false;
 
@@ -82,8 +83,10 @@ function MqttSwitchAccessory(log, config) {
 	this.client.on('message', function (topic, message) {
 		if (topic == that.topicStatusGet) {
 			var status = message.toString();
-			that.switchStatus = (status == that.onValue) ? true : false;
-		   	that.service.getCharacteristic(Characteristic.On).setValue(that.switchStatus, undefined, 'fromSetValue');
+                        if (status == that.onValue || status == that.offValue) {
+			    that.switchStatus = (status == that.onValue) ? true : false;
+		   	    that.service.getCharacteristic(Characteristic.On).setValue(that.switchStatus, undefined, 'fromSetValue');
+                        }
 		}
 	});
     this.client.subscribe(this.topicStatusGet);
@@ -97,6 +100,9 @@ module.exports = function(homebridge) {
 }
 
 MqttSwitchAccessory.prototype.getStatus = function(callback) {
+    if (this.statusCmd !== undefined) {
+    this.client.publish(this.topicStatusSet, this.statusCmd, this.publish_options);
+    }
     callback(null, this.switchStatus);
 }
 

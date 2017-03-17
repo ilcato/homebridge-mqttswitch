@@ -24,7 +24,8 @@
  			},
 			"onValue": "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
 			"offValue": "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
-		    "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
+                        "statusCmd": "OPTIONALLY PUT THE STATUS COMMAND HERE",
+		    "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
  			
     	}
     ]
