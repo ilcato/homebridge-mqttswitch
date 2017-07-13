@@ -3,22 +3,25 @@
 // Remember to add accessory to config.json. Example:
 // "accessories": [
 //         {
-//             "accessory"		    : "mqtt-sprinkler",
-//             "name"			    : "PUT THE NAME OF YOUR SWITCH HERE",
-//             "url"			    : "PUT URL OF THE BROKER HERE",
-//             "username"		    : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
-//             "password"		    : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
-//             "qos"		        : "QOS OF THE MESSAGES (DEFAULT 0)",
-//             "caption"		    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
-//             "serialNumberMAC"	: "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+//             "accessory"		        : "mqtt-sprinkler",
+//             "name"			        : "PUT THE NAME OF YOUR SWITCH HERE",
+//             "url"			        : "PUT URL OF THE BROKER HERE",
+//             "username"		        : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
+//             "password"		        : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
+//             "qos"		            : "QOS OF THE MESSAGES (DEFAULT 0)",
+//             "caption"		        : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+//             "serialNumberMAC"	    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+//             "displayNameDate"	    : "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST RUNTIME OF THE SPRINKLER",
+//             "displayNameLastTime"	: "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE LAST RUNTIME OF THE SPRINKLER",
+//             "displayNameLastDay"	    : "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE PAST 24 HOURS OF THE SPRINKLER",
 //             "topics"		    : {
 //                 "statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
 //                 "statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"
 //             },
-//             "onValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
-//             "offValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
-//             "statusCmd"		    : "OPTIONALLY PUT THE STATUS COMMAND HERE",
-//             "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
+//             "onValue"		        : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
+//             "offValue"		        : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
+//             "statusCmd"		        : "OPTIONALLY PUT THE STATUS COMMAND HERE",
+//             "integerValue"	        : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
 //         }
 //     ]
 //
@@ -33,6 +36,7 @@ var inherits = require('util').inherits;
 var mqtt = require("mqtt");
 var bkService;
 
+var displayNameDate, displayNameLastTime, displayNameLastDay;
 
 
 module.exports = function(homebridge) {
@@ -58,7 +62,7 @@ function fixInheritance(subclass, superclass) {
 
 
 BeregnungsanlageAccessory.BKLetzteBeregnungDatum = function() {
-	Characteristic.call(this, 'zuletzt Aktiv', '00001001-0000-1000-8000-775D67EC4111');
+	Characteristic.call(this, displayNameDate, '00001001-0000-1000-8000-775D67EC4111');
 	this.setProps({
 		format: Characteristic.Formats.STRING,
 		perms: [Characteristic.Perms.READ, Characteristic.Perms.NOTIFY]
@@ -67,7 +71,7 @@ BeregnungsanlageAccessory.BKLetzteBeregnungDatum = function() {
 };
 
 BeregnungsanlageAccessory.BKLetzteBeregnungMenge = function() {
-	Characteristic.call(this, 'Menge (letzte Aktivität)', '00001001-0000-1000-8000-775D67EC4112');
+	Characteristic.call(this, displayNameLastTime, '00001001-0000-1000-8000-775D67EC4112');
 	this.setProps({
 		format: Characteristic.Formats.FLOAT,
 		unit: "mm",
@@ -80,7 +84,7 @@ BeregnungsanlageAccessory.BKLetzteBeregnungMenge = function() {
 };
 
 BeregnungsanlageAccessory.BKLetzte24hBeregnungMenge = function() {
-	Characteristic.call(this, 'Menge (letzter Tag)', '00001001-0000-1000-8000-775D67EC4113');
+	Characteristic.call(this, displayNameLastDay, '00001001-0000-1000-8000-775D67EC4113');
 	this.setProps({
 		format: Characteristic.Formats.FLOAT,
 		unit: "mm",
@@ -126,6 +130,10 @@ function BeregnungsanlageAccessory(log, config) {
     	rejectUnauthorized	: false
 	};
 
+    displayNameDate = config["displayNameDate"]; 
+    displayNameLastTime = config["displayNameLastTime"]; 
+    displayNameLastDay = config["displayNameLastDay"]; 
+
 	this.topicStatusGet		= config["topics"].statusGet;
 	this.topicStatusSet		= config["topics"].statusSet;
 	this.statusCmd 			= config["statusCmd"];
@@ -147,7 +155,7 @@ function BeregnungsanlageAccessory(log, config) {
 	}
 
     this.switchStatus = false;  
-        
+
     this.bkService = new Service.Switch(this.name);
     this.bkService
     	.getCharacteristic(Characteristic.On)
@@ -157,7 +165,6 @@ function BeregnungsanlageAccessory(log, config) {
     this.bkService.addCharacteristic(BeregnungsanlageAccessory.BKLetzteBeregnungDatum);
   	this.bkService.addCharacteristic(BeregnungsanlageAccessory.BKLetzteBeregnungMenge);
   	this.bkService.addCharacteristic(BeregnungsanlageAccessory.BKLetzte24hBeregnungMenge);
-
 
 	// connect to MQTT broker
 	this.client = mqtt.connect(this.url, this.options);
