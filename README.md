@@ -8,7 +8,7 @@ The plugin is published through [NPM](https://www.npmjs.com/package/homebridge-m
     sudo npm install -g homebridge-mqtt-sprinkler
 
 # Information
-This Plugin has been forked by [homebridge-mqtt-switch](https://github.com/ilcato/homebridge-mqttswitch)
+This Plugin has been forked by [homebridge-mqttswitch](https://github.com/ilcato/homebridge-mqttswitch)
 
 This accessory provides a switch including additional informations like:
 + last Runtime of the sprinkler
