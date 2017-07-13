@@ -1,6 +1,6 @@
 {
-  "name": "homebridge-mqtt-beregnung",
-  "version": "0.0.1",
+  "name": "homebridge-mqtt-sprinkler",
+  "version": "0.0.2",
   "description": "Homebridge plugin for MQTT Sprinkler Valves including Additional Informations",
   "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
   "main": "index.js",
