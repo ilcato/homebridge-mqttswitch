@@ -4,7 +4,7 @@
 // "accessories": [
 //     "accessories": [
 //    	{
-//        	"accessory"		: "mqtt-beregnung",
+//        	"accessory"		: "mqtt-sprinkler",
 //        	"name"			: "PUT THE NAME OF YOUR SWITCH HERE",
 //        	"url"			: "PUT URL OF THE BROKER HERE",
 //			"username"		: "PUT USERNAME OF THE BROKER HERE",
@@ -42,7 +42,7 @@ module.exports = function(homebridge) {
   fixInheritance(BeregnungsanlageAccessory.BKLetzteBeregnungMenge, Characteristic);
   fixInheritance(BeregnungsanlageAccessory.BKLetzte24hBeregnungMenge, Characteristic);
 
-  homebridge.registerAccessory("homebridge-mqtt-beregnung", "mqtt-beregnung", BeregnungsanlageAccessory);
+  homebridge.registerAccessory("homebridge-mqtt-sprinkler", "mqtt-sprinkler", BeregnungsanlageAccessory);
 }
 
 // Necessary because Accessory is defined after we have defined all of our classes
@@ -95,7 +95,7 @@ BeregnungsanlageAccessory.BKLetzte24hBeregnungMenge = function() {
 function BeregnungsanlageAccessory(log, config) {
     this.log 				= log;
 	this.name 				= config["name"] || "Beregnungskreis";
-  	this.manufacturer 		= "Thomas Quander";
+  	this.manufacturer 		= "moppi4483";
 	this.model 				= "Eigenbau";
 	this.serialNumber 		= "0001";
 	this.serialNumberMAC 	= config['serialNumberMAC'] || "";
@@ -133,7 +133,7 @@ function BeregnungsanlageAccessory(log, config) {
     this.informationService = new Service.AccessoryInformation();
 	this.informationService
 		.setCharacteristic(Characteristic.Name, this.name)
-        .setCharacteristic(Characteristic.Manufacturer, "Thomas Quander")
+        .setCharacteristic(Characteristic.Manufacturer, "moppi4483")
         .setCharacteristic(Characteristic.Model, "Eigenbau")
         .setCharacteristic(Characteristic.SerialNumber, "0001");
         
