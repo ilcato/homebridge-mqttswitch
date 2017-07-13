@@ -16,7 +16,7 @@ This accessory provides a switch including additional informations like:
 + gauge of the sprinkler within the past 24 hours
 
 # Release notes
-VERSION 0.1
+VERSION 0.1.0
 + Initial Release
 
 # Configuration
