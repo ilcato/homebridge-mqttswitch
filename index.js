@@ -2,24 +2,25 @@
 //
 // Remember to add accessory to config.json. Example:
 // "accessories": [
-//     "accessories": [
-//    	{
-//        	"accessory"		: "mqtt-sprinkler",
-//        	"name"			: "PUT THE NAME OF YOUR SWITCH HERE",
-//        	"url"			: "PUT URL OF THE BROKER HERE",
-//			"username"		: "PUT USERNAME OF THE BROKER HERE",
-//			"password"		: "PUT PASSWORD OF THE BROKER HERE"
-//        	"caption"		: "PUT THE LABEL OF YOUR SWITCH HERE",
-//        	"topics"		: {
-//        		"statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
-//        		"statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"
-//        	},
-//			"onValue"		: "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
-//			"offValue"		: "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
-//			"statusCmd"		: "OPTIONALLY PUT THE STATUS COMMAND HERE",
-//			"integerValue"	: "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
-//		}
-// ],
+//         {
+//             "accessory"		    : "mqtt-sprinkler",
+//             "name"			    : "PUT THE NAME OF YOUR SWITCH HERE",
+//             "url"			    : "PUT URL OF THE BROKER HERE",
+//             "username"		    : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
+//             "password"		    : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
+//             "qos"		        : "QOS OF THE MESSAGES (DEFAULT 0)",
+//             "caption"		    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+//             "serialNumberMAC"	: "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+//             "topics"		    : {
+//                 "statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
+//                 "statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"
+//             },
+//             "onValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
+//             "offValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
+//             "statusCmd"		    : "OPTIONALLY PUT THE STATUS COMMAND HERE",
+//             "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
+//         }
+//     ]
 //
 // When you attempt to add a device, it will ask for a "PIN code".
 // The default code for all HomeBridge accessories is 031-45-154.
@@ -103,6 +104,7 @@ function BeregnungsanlageAccessory(log, config) {
 		qos: ((config["qos"] !== undefined)? config["qos"]: 0)
 								};
 	
+	this.caption			= config["caption"];
     this.url				= config['url'];
 	this.client_Id 			= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 	this.options 			= {
@@ -137,8 +139,13 @@ function BeregnungsanlageAccessory(log, config) {
         .setCharacteristic(Characteristic.Model, "Eigenbau")
         .setCharacteristic(Characteristic.SerialNumber, "0001");
         
-    this.onValue = "1";
-	this.offValue = "0";
+    this.onValue = (config["onValue"] !== undefined) ? config["onValue"]: "true";
+    this.offValue = (config["offValue"] !== undefined) ? config["offValue"]: "false";
+	if (config["integerValue"]) {
+		this.onValue = "1";
+		this.offValue = "0";
+	}
+
     this.switchStatus = false;  
         
     this.bkService = new Service.Switch(this.name);

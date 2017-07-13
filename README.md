@@ -21,20 +21,22 @@ VERSION 0.1
 
 # Configuration
 Remember to configure the plugin in config.json in your home directory inside the .homebridge directory. Configuration parameters:
-+ "accessory"	: "mqtt-sprinkler",
-+ "name"		: "PUT THE NAME OF YOUR SWITCH HERE",
-+ "url"			: "PUT URL OF THE BROKER HERE",
-+ "username"	: "PUT USERNAME OF THE BROKER HERE",
-+ "password"	: "PUT PASSWORD OF THE BROKER HERE",
-+ "caption"		: "PUT THE LABEL OF YOUR SWITCH HERE",
-+ "topics"		: {
-		"statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SWITCH HERE",
- 		"statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SWITCH HERE"
-	}
-+ "onValue"		: "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
-+ "offValue"	: "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
-+ "statusCmd"	: "OPTIONALLY PUT THE STATUS COMMAND HERE" 
-+ "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
++ "accessory"		    : "mqtt-sprinkler",
++ "name"			    : "PUT THE NAME OF YOUR SWITCH HERE",
++ "url"			    : "PUT URL OF THE BROKER HERE",
++ "username"		    : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
++ "password"		    : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
++ "qos"		        : "QOS OF THE MESSAGES (DEFAULT 0)",
++ "caption"		    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
++ "serialNumberMAC"	: "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
++ "topics"		    : {
++ + "statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
++ + "statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"
++ },
++ "onValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
++ "offValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
++ "statusCmd"		    : "OPTIONALLY PUT THE STATUS COMMAND HERE",
++ "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
 
 Look for a sample config in [config.json example](https://github.com/moppi4483/homebridge-mqtt-sprinkler/blob/master/config.json)
 
