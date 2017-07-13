@@ -1,7 +1,7 @@
 {
-  "name": "homebridge-mqttswitch",
-  "version": "0.0.3",
-  "description": "Homebridge plugin for MQTT switches",
+  "name": "homebridge-mqtt-beregnung",
+  "version": "0.0.1",
+  "description": "Homebridge plugin for MQTT Sprinkler Valves including Additional Informations",
   "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ilcato/homebridge-mqttswitch"
+    "url": "https://github.com/moppi4483/homebridge-mqtt-sprinkler"
   },
   "keywords": [
     "homebridge-plugin",
@@ -22,15 +22,16 @@
     "homekit",
     "Siri",
     "IoT",
-    "Switch"
+    "Switch",
+    "Sprinkler"
   ],
   "dependencies": {
     "mqtt": "^1.6.3"
   },
-  "author": "ilcato",
+  "author": "moppi4483",
   "license": "GPL2",
   "bugs": {
-    "url": "https://github.com/ilcato/homebridge-mqttswitch/issues"
+    "url": "https://github.com/moppi4483/homebridge-mqtt-sprinkler/issues"
   },
-  "homepage": "https://github.com/ilcato/homebridge-mqttswitch"
+  "homepage": "https://github.com/moppi4483/homebridge-mqtt-sprinkler"
 }
