@@ -29,11 +29,12 @@ var Service, Characteristic;
 var mqtt = require("mqtt");
 
 function MqttSwitchAccessory(log, config) {
-  	this.log          	= log;
+  	this.log        	= log;
   	this.name 			= config["name"];
   	this.url 			= config["url"];
     this.publish_options = {
-      qos: ((config["qos"] !== undefined)? config["qos"]: 0)
+    	qos: 	((config["qos"] !== undefined) ? config["qos"] : 0),
+		retain: ((config["retain"] !== undefined) ? config["retain"] : false)
     };
 	this.client_Id 		= 'mqttjs_' + Math.random().toString(16).substr(2, 8);
 	this.options = {
@@ -48,7 +49,7 @@ function MqttSwitchAccessory(log, config) {
 			topic: 'WillMsg',
 			payload: 'Connection Closed abnormally..!',
 			qos: 0,
-			retain: false
+			retain: ((config["retain"] !== undefined) ? config["retain"] : false)
 		},
 	    username: config["username"],
 	    password: config["password"],
@@ -57,25 +58,25 @@ function MqttSwitchAccessory(log, config) {
 	this.caption		= config["caption"];
 	this.topicStatusGet	= config["topics"].statusGet;
 	this.topicStatusSet	= config["topics"].statusSet;
-    this.onValue = (config["onValue"] !== undefined) ? config["onValue"]: "true";
-    this.offValue = (config["offValue"] !== undefined) ? config["offValue"]: "false";
+    this.onValue 		= (config["onValue"] !== undefined) ? config["onValue"]: "true";
+    this.offValue 		= (config["offValue"] !== undefined) ? config["offValue"]: "false";
 	if (config["integerValue"]) {
-		this.onValue = "1";
-		this.offValue = "0";
+		this.onValue 	= "1";
+		this.offValue 	= "0";
 	}
-    this.statusCmd = config["statusCmd"];
+    this.statusCmd 		= config["statusCmd"];
 
-	this.switchStatus = false;
+	this.switchStatus 	= false;
 
-	this.service = new Service.Switch(this.name);
+	this.service 		= new Service.Switch(this.name);
   	this.service
     	.getCharacteristic(Characteristic.On)
     	.on('get', this.getStatus.bind(this))
     	.on('set', this.setStatus.bind(this));
 
 	// connect to MQTT broker
-	this.client = mqtt.connect(this.url, this.options);
-	var that = this;
+	this.client 		= mqtt.connect(this.url, this.options);
+	var that 			= this;
 	this.client.on('error', function () {
 		that.log('Error event on MQTT');
 	});
@@ -83,10 +84,10 @@ function MqttSwitchAccessory(log, config) {
 	this.client.on('message', function (topic, message) {
 		if (topic == that.topicStatusGet) {
 			var status = message.toString();
-                        if (status == that.onValue || status == that.offValue) {
+            if (status == that.onValue || status == that.offValue) {
 			    that.switchStatus = (status == that.onValue) ? true : false;
 		   	    that.service.getCharacteristic(Characteristic.On).setValue(that.switchStatus, undefined, 'fromSetValue');
-                        }
+            }
 		}
 	});
     this.client.subscribe(this.topicStatusGet);
@@ -115,5 +116,5 @@ MqttSwitchAccessory.prototype.setStatus = function(status, callback, context) {
 }
 
 MqttSwitchAccessory.prototype.getServices = function() {
-  return [this.service];
+	return [this.service];
 }
