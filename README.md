@@ -32,6 +32,8 @@ Remember to configure the plugin in config.json in your home directory inside th
 + "onValue": "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
 + "offValue": "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
 + "statusCmd": "OPTIONALLY PUT THE STATUS COMMAND HERE" 
-+ "integerValue": "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
++ "integerValue": "OPTIONALLY INCLUDE THIS TO USE 1/0 AS VALUES"
+
+Note that if set, integerValue will override both onValue and offValue.
 
 Look for a sample config in [config.json example](https://github.com/ilcato/homebridge-mqttswitch/blob/master/config.json)
