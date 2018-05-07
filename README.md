@@ -16,9 +16,6 @@ This accessory provides a switch including additional informations like:
 + gauge of the sprinkler within the past 24 hours
 
 # Release notes
-VERSION 0.1.1
-+ added the possibility to change the display-name of the labels, which names the additional informations of the switch
-
 VERSION 0.1.0
 + Initial Release
 
@@ -32,16 +29,13 @@ Remember to configure the plugin in config.json in your home directory inside th
 + "qos"		        : "QOS OF THE MESSAGES (DEFAULT 0)",
 + "caption"		    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
 + "serialNumberMAC"	: "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
-+ "displayNameDate"	    : "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST RUNTIME OF THE SPRINKLER",
-+ "displayNameLastTime"	: "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE LAST RUNTIME OF THE SPRINKLER",
-+ "displayNameLastDay"	    : "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE PAST 24 HOURS OF THE SPRINKLER",       
 + "topics"		    : { 
 	+ "statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
 	+ "statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"},
 + "onValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
 + "offValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
 + "statusCmd"		    : "OPTIONALLY PUT THE STATUS COMMAND HERE",
-+ "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
++ "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
 
 Look for a sample config in [config.json example](https://github.com/moppi4483/homebridge-mqtt-sprinkler/blob/master/config.json)
 

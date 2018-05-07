@@ -13,25 +13,22 @@
 
     "accessories": [
         {
-            "accessory"		        : "mqtt-sprinkler",
-            "name"			        : "PUT THE NAME OF YOUR SWITCH HERE",
-            "url"			        : "PUT URL OF THE BROKER HERE",
-            "username"		        : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
-            "password"		        : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
-            "qos"		            : "QOS OF THE MESSAGES (DEFAULT 0)",
-            "caption"		        : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
-            "serialNumberMAC"	    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
-            "displayNameDate"	    : "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST RUNTIME OF THE SPRINKLER",
-            "displayNameLastTime"	: "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE LAST RUNTIME OF THE SPRINKLER",
-            "displayNameLastDay"	: "DISPLAY-NAME OF THE LABEL WHICH SHOWS THE LAST THE GAUGE OF THE PAST 24 HOURS OF THE SPRINKLER",
-            "topics"		        : {
+            "accessory"		    : "mqtt-sprinkler",
+            "name"			    : "PUT THE NAME OF YOUR SWITCH HERE",
+            "url"			    : "PUT URL OF THE BROKER HERE",
+            "username"		    : "OPTIONALLY PUT USERNAME OF THE BROKER HERE",
+            "password"		    : "OPTIONALLY PUT PASSWORD OF THE BROKER HERE",
+            "qos"		        : "QOS OF THE MESSAGES (DEFAULT 0)",
+            "caption"		    : "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+            "serialNumberMAC"	: "OPTIONALLY PUT THE LABEL OF YOUR SWITCH HERE",
+            "topics"		    : {
                 "statusGet"		: "PUT THE MQTT TOPIC FOR THE GETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE",
                 "statusSet"		: "PUT THE MQTT TOPIC FOR THE SETTING THE STATUS OF YOUR SPRINKLER ACCESSORY HERE"
             },
-            "onValue"		        : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
-            "offValue"		        : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
-            "statusCmd"		        : "OPTIONALLY PUT THE STATUS COMMAND HERE",
-            "integerValue"	        : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES"
-            }
-        ]
-    }
+            "onValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS ON HERE (DEFAULT true)",
+            "offValue"		    : "OPTIONALLY PUT THE VALUE THAT MEANS OFF HERE (DEFAULT false)",
+            "statusCmd"		    : "OPTIONALLY PUT THE STATUS COMMAND HERE",
+            "integerValue"	    : "OPTIONALLY SET THIS TRUE TO USE 1/0 AS VALUES",
+        }
+    ]
+}

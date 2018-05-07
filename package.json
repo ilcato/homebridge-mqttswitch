@@ -1,21 +1,72 @@
 {
-  "name": "homebridge-mqtt-sprinkler",
-  "version": "0.1.1",
+  "_args": [
+    [
+      {
+        "raw": "homebridge-mqtt-sprinkler",
+        "scope": null,
+        "escapedName": "homebridge-mqtt-sprinkler",
+        "name": "homebridge-mqtt-sprinkler",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Users/thomasquander"
+    ]
+  ],
+  "_from": "homebridge-mqtt-sprinkler@latest",
+  "_id": "homebridge-mqtt-sprinkler@0.1.0",
+  "_inCache": true,
+  "_location": "/homebridge-mqtt-sprinkler",
+  "_nodeVersion": "6.11.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/homebridge-mqtt-sprinkler-0.1.0.tgz_1499939178233_0.05383935058489442"
+  },
+  "_npmUser": {
+    "name": "moppi4483",
+    "email": "thomas.quander@gmail.com"
+  },
+  "_npmVersion": "3.10.10",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "homebridge-mqtt-sprinkler",
+    "scope": null,
+    "escapedName": "homebridge-mqtt-sprinkler",
+    "name": "homebridge-mqtt-sprinkler",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/homebridge-mqtt-sprinkler/-/homebridge-mqtt-sprinkler-0.1.0.tgz",
+  "_shasum": "78787df3d82bf243d58658d3c3858ef41dd8f4be",
+  "_shrinkwrap": null,
+  "_spec": "homebridge-mqtt-sprinkler",
+  "_where": "/Users/thomasquander",
+  "author": {
+    "name": "moppi4483"
+  },
+  "bugs": {
+    "url": "https://github.com/moppi4483/homebridge-mqtt-sprinkler/issues"
+  },
+  "dependencies": {
+    "mqtt": "^1.6.3"
+  },
   "description": "Homebridge plugin for MQTT Sprinkler Valves including Additional Informations",
-  "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "echo \"Error: configure and run homebridge to start\" && exit 1"
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "shasum": "78787df3d82bf243d58658d3c3858ef41dd8f4be",
+    "tarball": "https://registry.npmjs.org/homebridge-mqtt-sprinkler/-/homebridge-mqtt-sprinkler-0.1.0.tgz"
   },
   "engines": {
-    "node": ">4.0.0",
-    "homebridge": ">=0.2.0"
+    "homebridge": ">=0.2.0",
+    "node": ">4.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/moppi4483/homebridge-mqtt-sprinkler"
-  },
+  "gitHead": "78bd3efecdc07cb6fd82da368b53282392d1d0b0",
+  "homepage": "https://github.com/moppi4483/homebridge-mqtt-sprinkler",
   "keywords": [
     "homebridge-plugin",
     "MQTT",
@@ -25,13 +76,25 @@
     "Switch",
     "Sprinkler"
   ],
-  "dependencies": {
-    "mqtt": "^1.6.3"
-  },
-  "author": "moppi4483",
   "license": "GPL2",
-  "bugs": {
-    "url": "https://github.com/moppi4483/homebridge-mqtt-sprinkler/issues"
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "moppi4483",
+      "email": "thomas.quander@gmail.com"
+    }
+  ],
+  "name": "homebridge-mqtt-sprinkler",
+  "note": "peerDependencies is hardcoded to peerDepdendencies in homebridge!!!",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moppi4483/homebridge-mqtt-sprinkler.git"
   },
-  "homepage": "https://github.com/moppi4483/homebridge-mqtt-sprinkler"
+  "scripts": {
+    "start": "echo \"Error: configure and run homebridge to start\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "0.9.0"
 }
